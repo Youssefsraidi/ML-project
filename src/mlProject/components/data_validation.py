@@ -21,11 +21,16 @@ class DataValidation:
                     validation_status = False
                     with open(self.config.STATUS_FILE, 'w') as f:
                         f.write(f"validation status: {validation_status}")
+                    break  # Arrête la boucle si une colonne est invalide
                 else:
                     validation_status = True
-                    with open(self.config.STATUS_FILE, 'w') as f:
-                        f.write(f"validation status: {validation_status}")
 
+            # Enregistre le statut final seulement si toutes les colonnes sont valides
+            if validation_status:
+                with open(self.config.STATUS_FILE, 'w') as f:
+                    f.write(f"validation status: {validation_status}")
+
+                    
             return validation_status
 
         except Exception as e:
